@@ -1,0 +1,45 @@
+# depslib dependency file v1.0
+1698850520 source:f:\poke2\main.c
+	"liblistaO.h"
+
+1698850366 f:\poke2\liblistao.h
+
+1698922878 source:f:\poke2\liblistao.c
+	<stdio.h>
+	<stdlib.h>
+	"string.h"
+	"liblistaO.h"
+
+1698931884 source:e:\poke2\main.c
+	"liblistaO.h"
+
+1698929032 e:\poke2\liblistao.h
+
+1698931564 source:e:\poke2\liblistao.c
+	<stdio.h>
+	<stdlib.h>
+	"string.h"
+	"liblistaO.h"
+
+1699395595 source:a:\facu\programacion\poke2\main.c
+	"liblistaO.h"
+
+1699397630 a:\facu\programacion\poke2\liblistao.h
+
+1699395595 source:a:\facu\programacion\poke2\liblistao.c
+	<stdio.h>
+	<stdlib.h>
+	"string.h"
+	"liblistaO.h"
+
+1699535058 source:d:\poke2\liblistao.c
+	<stdio.h>
+	<stdlib.h>
+	"string.h"
+	"liblistaO.h"
+
+1699535666 d:\poke2\liblistao.h
+
+1699535058 source:d:\poke2\main.c
+	"liblistaO.h"
+
