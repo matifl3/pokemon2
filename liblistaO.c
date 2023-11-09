@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "string.h"
+#include "gotoxy.h"
 #include "liblistaO.h"
 
 
@@ -817,4 +818,115 @@ void mostrarCantidadRarezas(nodoTipo* lista)
     printf("\nEste es el porcentaje de raras que hay: %d%%",raro);
     printf("\nEsta es el porcentaje de legendarios: %d%%",legendario);
 }
+
+///------------------------------11 interfaz---------------------------------///
+int movertecla(int tecla,int opcionSeleccionada,int opcionSalida)
+{
+
+    switch (tecla)
+    {
+    case 72:
+        opcionSeleccionada--;
+        if (opcionSeleccionada < 0)
+        {
+            opcionSeleccionada = opcionSalida -1;
+        }
+        break;
+    case 80:
+        opcionSeleccionada++;
+        if (opcionSeleccionada >= opcionSalida)
+        {
+            opcionSeleccionada = 0;
+        }
+        break;
+    }
+
+    return opcionSeleccionada;
+}
+
+/*
+void menu(char archivo[])
+{
+    int opcionSeleccionada = 0;
+    int opcionMaxima = 4;
+    int tecla;
+    int opcionSalida=4;
+    hidecursor(0);
+    int flag=0;
+
+    do
+    {
+        do
+        {
+            system("cls");
+            color(14); // Color amarillo
+            gotoxy(35, 5);
+            printf("BIENVENIDO");
+            color(15); // Color blanco
+            gotoxy(30, 7);
+            printf("1. Cargar archivo");
+            gotoxy(30, 8);
+            printf("2. Muestrar los alumnos");
+            gotoxy(30, 9);
+            printf("3. Organiza Archivo");
+            gotoxy(30,10);
+            printf("4. Salir");
+
+
+            gotoxy(28, 7 + opcionSeleccionada);
+            printf("->");
+
+
+            tecla = getch();
+
+            opcionSeleccionada=movertecla(tecla,opcionSeleccionada,opcionSalida);
+
+        }
+        while (tecla != 13);
+
+
+
+        switch(opcionSeleccionada)
+        {
+        case 0:
+            system("cls");
+            cargarArch(archivo);
+            break;
+        case 1:
+            system("cls");
+            viewFile(archivo);
+            break;
+        case 2:
+            system("cls");
+            organizarArchivo(archivo);
+            break;
+        }
+
+        do
+        {
+            system("cls");
+            color(14);
+            gotoxy(35,5);
+            printf("QUIERE SALIR DE LA RED? ");
+            color(15);
+            gotoxy(30,7);
+            printf("Si");
+            gotoxy(30,8);
+            printf("No");
+
+            gotoxy(28, 7 + opcionSeleccionada);
+            printf("->");
+            tecla = getch();
+
+            opcionSeleccionada=movertecla(tecla,opcionSeleccionada,opcionSalida);
+        }
+        while (tecla != 13);
+
+        if(opcionSeleccionada==0)
+            flag=-1;
+    }
+    while (flag!=-1);
+}
+*/
+
 
