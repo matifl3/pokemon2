@@ -84,9 +84,12 @@ void mostrarCantidadRarezas(nodoTipo* lista);
 float promedioPrecio(nodoTipo* lista);
 int totalPrecio(nodoTipo* lista);
 void mostrarPrecios(nodoTipo* lista);
+void mostrarStats(nodoTipo* lista);
+///---------------------------- interfaz---------------------------------------//
 
-
-
+void mostradorDeMazos(nodoTipo* lista);
+void menu(nodoTipo* lista);
+int movertecla(int tecla,int opcionSeleccionada,int opcionSalida);
 
 
 

@@ -102,7 +102,9 @@ void mostrarListaTipo(nodoTipo* listaO)
     {
         while(listaO!=NULL)
         {
-            printf("%s \n", listaO->tipo);
+            color(14);//color amarillo
+            printf("\n------------\t%s\t------------ \n", listaO->tipo);
+            color(15);//color blanco
             mostrarListaCarta(listaO->lista);
             listaO=listaO->siguiente;
             printf("\n");
@@ -115,6 +117,8 @@ void mostrarListaCarta(nodoPoke* lista)
     {
         while(lista!=NULL)
         {
+
+
             printf("Nombre: %s\n",lista->dato.nombre);
             if(lista->dato.rareza==1)
             {
@@ -158,6 +162,10 @@ void mostrarListaCarta(nodoPoke* lista)
             {
                 printf("Calidad: Secreta.\n");
             }
+            printf("Precio: %d",lista->dato.precio);
+
+
+
             lista=lista->siguiente;
         }
     }
@@ -683,9 +691,9 @@ float promedioPrecio(nodoTipo* lista)
 {
     nodoTipo* auxTipo=lista;
     nodoPoke* auxPoke;
-    int i=0;
-    int suma=0;
-    int totalPrecio=0;
+    float i=0;
+    float suma=0;
+    float totalPrecio=0;
     float promedio;
     if(auxTipo!=NULL)
     {
@@ -741,9 +749,9 @@ float promedioHP(nodoTipo* lista)
 {
     nodoTipo* auxTipo=lista;
     nodoPoke* auxPoke;
-    int i=0;
-    int suma=0;
-    int totalHp=0;
+    float i=0;
+    float suma=0;
+    float totalHp=0;
     float promedio;
     if(auxTipo!=NULL)
     {
@@ -768,9 +776,9 @@ float promediolvl(nodoTipo* lista)
 {
     nodoTipo* auxTipo=lista;
     nodoPoke* auxPoke;
-    int i=0;
-    int suma=0;
-    int totalvl=0;
+    float i=0;
+    float suma=0;
+    float totalvl=0;
     float promedio;
     if(auxTipo!=NULL)
     {
@@ -808,16 +816,33 @@ void mostrarCantidadRarezas(nodoTipo* lista)
     int legendario=statsRarezaLegendario(lista);
     int cantidadTotal=comun+pocoComun+raro+legendario;
 
-    comun=comun*100/cantidadTotal;
-    pocoComun=pocoComun*100/cantidadTotal;
-    raro=raro*100/cantidadTotal;
-    legendario*100/cantidadTotal;
+    comun = comun * 100 / cantidadTotal;
+    pocoComun = pocoComun * 100 / cantidadTotal;
+    raro = raro * 100 / cantidadTotal;
+    legendario = legendario * 100 / cantidadTotal;
 
     printf("\nEste es el porcentaje de comunes: %d%%",comun);
     printf("\nEste es el porcentaje de cartas poco comunes: %d%%",pocoComun);
     printf("\nEste es el porcentaje de raras que hay: %d%%",raro);
     printf("\nEsta es el porcentaje de legendarios: %d%%",legendario);
 }
+
+void mostrarStats(nodoTipo* lista)
+{
+    color(14);
+    printf("\nSTATS\n");
+    color(15);
+
+    mostrarCantidadRarezas(lista);
+    printf("\n");
+
+    mostrarPrecios(lista);
+    printf("\n");
+    mostrarPromedioCartasxTipo(lista);
+    printf("\n");
+}
+
+
 
 ///------------------------------11 interfaz---------------------------------///
 int movertecla(int tecla,int opcionSeleccionada,int opcionSalida)
@@ -844,11 +869,11 @@ int movertecla(int tecla,int opcionSeleccionada,int opcionSalida)
     return opcionSeleccionada;
 }
 
-/*
-void menu(char archivo[])
+
+
+void menu(nodoTipo* lista)
 {
     int opcionSeleccionada = 0;
-    int opcionMaxima = 4;
     int tecla;
     int opcionSalida=4;
     hidecursor(0);
@@ -864,11 +889,11 @@ void menu(char archivo[])
             printf("BIENVENIDO");
             color(15); // Color blanco
             gotoxy(30, 7);
-            printf("1. Cargar archivo");
+            printf("1. Cargar el Mazo");
             gotoxy(30, 8);
-            printf("2. Muestrar los alumnos");
+            printf("2. Mostrar Mazos");
             gotoxy(30, 9);
-            printf("3. Organiza Archivo");
+            printf("3. Intercambiar cartas");
             gotoxy(30,10);
             printf("4. Salir");
 
@@ -890,15 +915,14 @@ void menu(char archivo[])
         {
         case 0:
             system("cls");
-            cargarArch(archivo);
+
             break;
         case 1:
             system("cls");
-            viewFile(archivo);
+            mostradorDeMazos(lista);
             break;
         case 2:
             system("cls");
-            organizarArchivo(archivo);
             break;
         }
 
@@ -926,7 +950,65 @@ void menu(char archivo[])
             flag=-1;
     }
     while (flag!=-1);
+
 }
-*/
+
+
+void mostradorDeMazos(nodoTipo* lista)
+{
+    int opcionSeleccionada = 0;
+    int tecla;
+    int opcionSalida=3;
+    hidecursor(0);
+    int flag=0;
+do{
+    do
+    {
+        system("cls");
+        color(14); // Color amarillo
+        gotoxy(35, 5);
+        printf("MOSTRADOR DE MAZO");
+        color(15); // Color blanco
+        gotoxy(30, 7);
+        printf("1. Mostrar mazo completo");
+        gotoxy(30, 8);
+        printf("2. Mostrar Stats");
+        gotoxy(30, 9);
+        printf("3. Salir");
+
+
+
+        gotoxy(28, 7 + opcionSeleccionada);
+        printf("->");
+
+
+        tecla = getch();
+
+        opcionSeleccionada=movertecla(tecla,opcionSeleccionada,opcionSalida);
+
+    }while (tecla != 13);
+
+
+        switch(opcionSeleccionada)
+        {
+        case 0:
+            system("cls");
+            mostrarListaTipo(lista);
+            printf("\n\n\n");
+            system("pause");
+            break;
+        case 1:
+            system("cls");
+            mostrarStats(lista);
+            printf("\n\n\n");
+            system("pause");
+            break;
+        case 2:
+            flag=-1;
+        }
+    }
+    while (flag!=-1);
+
+ }
 
 

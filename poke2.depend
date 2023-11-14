@@ -43,3 +43,22 @@
 1699535058 source:d:\poke2\main.c
 	"liblistaO.h"
 
+1491400450 source:c:\users\matif\onedrive\escritorio\facultad mati\programacion y laboratorio 2\poke2\gotoxy.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1699646092 source:c:\users\matif\onedrive\escritorio\facultad mati\programacion y laboratorio 2\poke2\main.c
+	"liblistaO.h"
+
+1699645391 c:\users\matif\onedrive\escritorio\facultad mati\programacion y laboratorio 2\poke2\liblistao.h
+
+1699646180 source:c:\users\matif\onedrive\escritorio\facultad mati\programacion y laboratorio 2\poke2\liblistao.c
+	<stdio.h>
+	<stdlib.h>
+	"string.h"
+	"gotoxy.h"
+	"liblistaO.h"
+
+1491399896 c:\users\matif\onedrive\escritorio\facultad mati\programacion y laboratorio 2\poke2\gotoxy.h
+
