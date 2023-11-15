@@ -1,4 +1,4 @@
-#include <stdio.h>
+/#include <stdio.h>
 #include <stdlib.h>
 #include "string.h"
 #include "gotoxy.h"
@@ -296,7 +296,7 @@ nodoPoke* agregarAlFinalPoke (nodoPoke* lista,nodoPoke* nuevo)
     }
     return lista;
 }
-nodoTipo* buscarTipoLugar(nodoTipo * lista,char tipo[20])   ///// el error estaba en que se comparaba lista en el while y no el aux
+nodoTipo* buscarTipoLugar(nodoTipo * lista,char tipo[20])   
 {
     nodoTipo * aux=lista;
 
@@ -578,13 +578,6 @@ void filtrarCartasPTipo(nodoTipo* listaO)
 ///-----------punto7-estadisticadeMazo-----------///
 
 
-void estadisticasMazo(nodoTipo* listaO)
-{
-    if(listaO!=NULL)
-    {
-
-    }
-}
 
 ///--------------------------------------punto 9 genera estadisticas---------------------------------///
 
@@ -915,7 +908,8 @@ void menu(nodoTipo* lista)
         {
         case 0:
             system("cls");
-
+//cargar mazo- guardar datos- leer datos- eliminar carta- intercambio- cargarMazoIntercambio
+//cargarMazoCompetitiVo- cargarMazoMemoria- mostarcarta- estadistica del mazo
             break;
         case 1:
             system("cls");
