@@ -1160,12 +1160,8 @@ void menu(nodoTipo* lista,nodoPila*pila)
         {
         case 0:
             system("cls");
-<<<<<<< HEAD
             menu1(lista,pila);
-=======
-//cargar mazo- guardar datos- leer datos- eliminar carta- intercambio- cargarMazoIntercambio
-//cargarMazoCompetitiVo- cargarMazoMemoria- mostarcarta- estadistica del mazo
->>>>>>> 820421094c8b7b914e3879fa10d72a9d4e2a4989
+
             break;
         case 1:
             system("cls");
