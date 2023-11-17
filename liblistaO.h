@@ -17,7 +17,17 @@ typedef struct
     stCarta dato;
     struct nodoPoke* siguiente;
 } nodoPoke;
-
+typedef struct
+{
+    stCarta mazoI;
+    struct nodoDPoke* siguiente;
+    struct nodoDPoke* anterior;
+}nodoDPoke;
+typedef struct
+{
+    nodoDPoke* inicioF;
+    nodoDPoke* finalF;
+}filaIter;
 typedef struct
 {
     char tipo[20];// agua - fuego - planta - tierra - roca
@@ -32,19 +42,6 @@ typedef struct
     int cantidad;
     struct nodoPila* sig;
 } nodoPila;
-
-typedef struct
-{
-    stCarta mazoI;
-    struct nodoDPoke* siguiente;
-    struct nodoDPoke* anterior;
-}nodoDPoke;
-typedef struct
-{
-    nodoDPoke* inicioF;
-    nodoDPoke* finalF;
-}filaIter;
-
 typedef struct
 {
     stCarta mazoI;
@@ -77,17 +74,29 @@ nodoPoke* agregarAlFinalPoke (nodoPoke*,nodoPoke*);
 nodoPoke* buscarUltimo(nodoPoke*);
 ///----------------------------------------punto 3-busqueda de carta-------------------------------///
 nodoPoke* buscarCartaNombreO(nodoTipo*);
+nodoPoke* buscarCartaNombreYTipo(nodoTipo* listaO,char nombreBuscado[]);
 ///------------------punto 4-eliminar una carta---------------------------///
-nodoTipo* eliminarCarta(nodoTipo*);
+nodoTipo* eliminarCarta(nodoTipo* listaO);
+nodoTipo* eliminarCartaTipo(nodoTipo* listaO,char nombreBuscado[]);
 ///---------------------------------------purto 5-guardado de cartas----------///
 ///---extra funcion para contar la cantidad de cartas en un tipo-----------------///
 int contarCantidadCartasT(nodoPoke* );
 ///--------------------------------
 void guardarMazo(nodoTipo*);
-nodoTipo* leerMazo(nodoTipo* listaO);
-///-----------------------------------------///
+nodoTipo* leerMazo(nodoTipo* );
 void guardarMazo2(nodoTipo*);
-nodoTipo* leerMazo2(nodoTipo* listaO);
+nodoTipo* leerMazo2(nodoTipo* );
+///----mazo intercambio----///
+void guardarMIJ1(nodoA*,FILE*);
+nodoA* leerMIJ1(nodoA*,FILE*);
+void guardarMIJ2(nodoA*,FILE*);
+nodoA* leerMIJ2(nodoA*,FILE*);
+///mazo memoria///
+void guardarMazoMemo1(filaIter*);
+void leerMazoMemo1(filaIter*);
+void guardarMazoMemo2(filaIter*);
+void leerMazoMemo2(filaIter*);
+
 ///-------------------------------------punto 6-Filtrar cartas por tipo-------------/////
 
 void filtrarCartasPTipo(nodoTipo*);
@@ -141,7 +150,16 @@ nodoPila* desapilar(nodoPila** pila);
 nodoPila* muchosApila(nodoPila*pila,nodoPoke*lista);
 nodoPila*mostrarPila(nodoPila* pila);
 
-
+///-----------------------------------mazo mazoMemoria------///
+nodoDPoke* inicListaD();
+void inicFila(filaIter*);
+nodoDPoke* crearNodoD(stCarta);
+void cargarMazoMemoria(filaIter*,nodoTipo*);
+void pasarListaAFila(filaIter*,nodoDPoke*);
+nodoDPoke* agregarFinalNodoD(nodoDPoke*,nodoDPoke*);
+int existeNodoFila(nodoDPoke*,nodoPoke*);
+void mostrarfila(filaIter*);
+void mostrarListaD(nodoDPoke*);
 
 
 

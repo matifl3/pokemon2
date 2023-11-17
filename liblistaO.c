@@ -381,6 +381,36 @@ nodoPoke* buscarCartaNombreO(nodoTipo* listaO)
 
     return cBuscada;
 }
+
+nodoPoke* buscarCartaNombreYTipo(nodoTipo* listaO,char nombreBuscado[])
+{
+    nodoPoke* cBuscada=inicListaP();
+    nodoPoke* auxPoke;
+    if(listaO!=NULL)
+    {
+        while(listaO!=NULL)
+        {
+            auxPoke=listaO->lista;
+            while(auxPoke!=NULL)
+            {
+                if(strcmp(auxPoke->dato.nombre,nombreBuscado)==0)
+                {
+                    cBuscada=auxPoke;
+                }
+                auxPoke=auxPoke->siguiente;
+            }
+            listaO=listaO->siguiente;
+        }
+    }
+    else
+    {
+        printf("El mazo esta vacio:\n");
+    }
+
+    return cBuscada;
+}
+
+
 ///------------------punto 4-eliminar una carta---------------------------///
 nodoTipo* eliminarCarta(nodoTipo* listaO)
 {
@@ -395,6 +425,57 @@ nodoTipo* eliminarCarta(nodoTipo* listaO)
     printf("ingrese el nombre de la carta a eliminar: ");
     fflush(stdin);
     gets(nombreBuscado);
+    if(seg!=NULL)
+    {
+        while((seg!=NULL) && (flagBorrado == 0))
+        {
+            auxPoke=seg->lista;
+            if(strcmp(auxPoke->dato.nombre, nombreBuscado)==0)
+            {
+                cBuscada=auxPoke;
+                free(cBuscada);
+                seg->lista=auxPoke->siguiente;
+                flagBorrado=1;
+            }
+            else
+            {
+                while((auxPoke!=NULL)  && (flagBorrado == 0))
+                {
+                    if(strcmp(auxPoke->dato.nombre,nombreBuscado)==0)
+                    {
+                        cBuscada=auxPoke;
+                        auxPoke=auxPoke->siguiente;
+                        antePoke->siguiente= auxPoke;
+                        free(cBuscada);
+                        flagBorrado = 1;
+                    }
+                    else
+                    {
+                        antePoke= auxPoke;
+                        auxPoke=auxPoke->siguiente;
+                    }
+                }
+
+            }
+            seg=seg->siguiente;
+        }
+    }
+    else
+    {
+        printf("El mazo esta bacio:\n");
+    }
+    return listaO;
+}
+
+nodoTipo* eliminarCartaTipo(nodoTipo* listaO,char nombreBuscado[])
+{
+    nodoPoke* cBuscada;
+    nodoTipo* seg= listaO;
+    nodoPoke* auxPoke;
+    nodoPoke* antePoke;
+    int flagBorrado = 0;
+    printf("Usted tiene estas cartas :");
+    mostrarListaTipo(listaO);
     if(seg!=NULL)
     {
         while((seg!=NULL) && (flagBorrado == 0))
@@ -502,7 +583,124 @@ nodoTipo* leerMazo(nodoTipo* listaO)
 
     return listaO;
 }
+///----guardarMazos----///
+void guardarMIJ1(nodoA* arbol,FILE* ficher)
+{
+    if(ficher!=NULL)
+    {
+        if(arbol!=NULL)
+        {
+            fwrite(&arbol->mazoI,sizeof(stCarta),1,ficher);
+            guardarMIJ1(arbol->dere,ficher);
+            guardarMIJ1(arbol->izq,ficher);
+        }
+    }
+}
+void guardarMIJ2(nodoA* arbol,FILE* ficher)
+{
+    if(ficher!=NULL)
+    {
+        if(arbol!=NULL)
+        {
+            printf("gola\n");
+            fwrite(&arbol->mazoI,sizeof(stCarta),1,ficher);
+            guardarMIJ2(arbol->dere,ficher);
+            guardarMIJ2(arbol->izq,ficher);
+        }
+    }
+}
+nodoA* leerMIJ1(nodoA* arbol,FILE* ficher)
+{
+    nodoA* aux=inicArbol();
+    stCarta cartita;
+    if(ficher!=NULL)
+    {
 
+        while(fread(&cartita,sizeof(stCarta),1,ficher)>0)
+        {
+            aux=crearNodoA(cartita);
+            arbol=agregarArbol(arbol,aux);
+        }
+    }
+    return arbol;
+}
+nodoA* leerMIJ2(nodoA* arbol,FILE* ficher)
+{
+    nodoA* aux=inicArbol();
+    stCarta cartita;
+    if(ficher!=NULL)
+    {
+        while(fread(&cartita,sizeof(stCarta),1,ficher)>0)
+        {
+            aux=crearNodoA(cartita);
+            arbol=agregarArbol(arbol,aux);
+        }
+    }
+    return arbol;
+}
+///mazo memoria///
+void guardarMazoMemo1(filaIter* filita)
+{
+    nodoDPoke* lista=filita->inicioF;
+    FILE* fpJugador=fopen("MazoMemoria1.bin","wb");
+    if(fpJugador!=NULL)
+    {
+        while(lista!=NULL)
+        {
+
+            fwrite(&lista->mazoI,sizeof(stCarta),1,fpJugador);
+            lista=lista->siguiente;
+        }
+    }
+}
+void guardarMazoMemo2(filaIter* filita)
+{
+    nodoDPoke* lista=filita->inicioF;
+    FILE* fpJugador=fopen("MazoMemoria2.bin","wb");
+    if(fpJugador!=NULL)
+    {
+        while(lista!=NULL)
+        {
+            fwrite(&lista->mazoI,sizeof(stCarta),1,fpJugador);
+            lista=lista->siguiente;
+        }
+    }
+}
+
+void leerMazoMemo1(filaIter* filita)
+{
+    nodoDPoke* lista=filita->inicioF;
+    nodoDPoke* aux=inicListaD();
+    stCarta cartita;
+    FILE* fpJugador=fopen("MazoMemoria1.bin","rb");
+    if(fpJugador!=NULL)
+    {
+        while(fread(&cartita,sizeof(stCarta),1,fpJugador)>0)
+        {
+            aux=crearNodoD(cartita);
+            lista=agregarFinalNodoD(lista,aux);
+        }
+    }
+    fclose(fpJugador);
+    filita->inicioF=lista;
+}
+void leerMazoMemo2(filaIter* filita)
+{
+    nodoDPoke* lista=filita->inicioF;
+    nodoDPoke* aux=inicListaD();
+    stCarta cartita;
+    FILE* fpJugador=fopen("MazoMemoria2.bin","rb");
+    if(fpJugador!=NULL)
+    {
+        while(fread(&cartita,sizeof(stCarta),1,fpJugador)>0)
+        {
+            aux=crearNodoD(cartita);
+            lista=agregarFinalNodoD(lista,aux);
+        }
+    }
+    fclose(fpJugador);
+    filita->inicioF=lista;
+}
 ///--------------------------------------------------------////
 void guardarMazo2(nodoTipo* listaO)
 {
@@ -576,7 +774,199 @@ void filtrarCartasPTipo(nodoTipo* listaO)
     }
 }
 ///-----------punto7-estadisticadeMazo-----------///
+///--------------punto8---cargar cartasMazoMemoria--////
+nodoDPoke* inicListaD()
+{
+    return NULL;
+}
+void inicFila(filaIter* filita)
+{
+    filita->inicioF=inicListaD();
+    filita->finalF=inicListaD();
+}
+nodoDPoke* crearNodoD(stCarta carta)
+{
+    nodoDPoke* aux=(nodoDPoke*)malloc(sizeof(nodoDPoke));
+    aux->mazoI=carta;
+    aux->siguiente=inicListaD();
+    aux->anterior=inicListaD();
+    return aux;
+}
+nodoDPoke* agregarFinalNodoD(nodoDPoke* lista, nodoDPoke* nuevoN)
+{
+    if(lista==NULL)
+    {
+        lista=nuevoN;
+    }
+    else
+    {
+        nodoDPoke* seg=lista;
+        while(seg->siguiente!=NULL)
+        {
+            seg=seg->siguiente;
+        }
+        if(seg!=NULL)
+        {
+            seg->siguiente=nuevoN;
+            nuevoN->anterior=seg;
+        }
+    }
+    return lista;
+}
+int existeNodoFila(nodoDPoke* lista,nodoPoke* cartaB)
+{
+    int existe=0;
 
+    if(lista!=NULL)
+    {
+        while(lista!=NULL)
+        {
+            if(lista->mazoI.calidadC==cartaB->dato.calidadC)
+            {
+                if(lista->mazoI.hp==cartaB->dato.hp)
+                {
+                    if(lista->mazoI.lvl==cartaB->dato.lvl)
+                    {
+                        if(strcmp(lista->mazoI.nombre,cartaB->dato.nombre)==0)
+                        {
+                            if(lista->mazoI.precio==cartaB->dato.precio)
+                            {
+                                if(lista->mazoI.rareza==cartaB->dato.rareza)
+                                {
+                                    if(strcmp(lista->mazoI.tipo,cartaB->dato.tipo)==0)
+                                    {
+                                        existe++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            lista=lista->siguiente;
+        }
+    }
+    return existe;
+}
+void cargarMazoMemoria(filaIter* filita, nodoTipo* listaO)
+{
+    char continuar='s';
+    char cartaI [20];
+    nodoPoke* cartaB;
+    char nombreBuscado[20];
+    if(listaO!=NULL)
+    {
+        do
+        {
+            printf("Usted tien estas cartas:\n");
+            mostrarCatasMazo(listaO);
+            printf("ingrese el nombre de la carta a buscar: ");
+            fflush(stdin);
+            gets(nombreBuscado);
+            if((buscarCartaNombreYTipo(listaO,nombreBuscado))!=NULL)
+            {
+                cartaB=buscarCartaNombreYTipo(listaO, nombreBuscado);
+                stCarta cartaCambio=cartaB->dato;
+                nodoDPoke* aux=crearNodoD(cartaCambio);
+                if(existeNodoFila(filita->inicioF,aux)==0)
+                {
+                    pasarListaAFila(filita,aux);
+                    printf("La carta se ingreso en el mazo Memoria Correctamente:\n");
+                    printf("Desea ingresar otra carta al mazo de Memoria:?\n");
+                    printf("Ingrese 's'");
+                    scanf("%c",&continuar);
+                }else
+                {
+                    printf("La carta que se desea ingresar ya exsiste en el mazo:\n");
+                    printf("Desea ingresar otra carta al mazo de Memoria:?\n");
+                    printf("Ingrese 's'");
+                    scanf("%c",&continuar);
+                }
+            }else
+            {
+                printf("El nombre de la carta buscada no existe:\n");
+                printf("Desea ingresar otra carta al mazo de Memoria:?\n");
+                printf("Ingrese 's'");
+                scanf("%c",&continuar);
+            }
+        }
+        while(continuar=='s'||continuar=='S');
+
+    }
+    return filita;
+}
+void pasarListaAFila(filaIter* filita, nodoDPoke* nuevoN)
+{
+
+    if(filita->inicioF==NULL)
+    {
+        filita->inicioF=nuevoN;
+        filita->finalF=nuevoN;
+    }
+    else
+    {
+        filita->inicioF=agregarFinalNodoD(filita->inicioF,nuevoN);
+        filita->finalF=nuevoN;
+    }
+    return filita;
+}
+void mostrarfila(filaIter* filita)
+{
+    if(filita->inicioF!=NULL)
+    {
+        mostrarListaD(filita->inicioF);
+    }
+}
+void mostrarListaD(nodoDPoke* lista)
+{
+    if(lista!=NULL)
+    {
+        printf("Nombre: %s\n",lista->mazoI.nombre);
+        if(lista->mazoI.rareza==1)
+        {
+            printf("Rareza: Comun.\n");
+        }
+        else if(lista->mazoI.rareza==2)
+        {
+            printf("Rareza: Poco Comun.\n");
+        }
+        else if(lista->mazoI.rareza==3)
+        {
+            printf("Rareza: Raro.\n");
+        }
+        else if(lista->mazoI.rareza==4)
+        {
+            printf("Rareza: Legendario.\n");
+        }
+        printf("hp: %d\n",lista->mazoI.hp);
+        printf("lvl: %d\n",lista->mazoI.lvl);
+        if(lista->mazoI.calidadC==1)
+        {
+            printf("Calidad: Comun.\n");
+        }
+        else if(lista->mazoI.calidadC==2)
+        {
+            printf("Calidad: Infrecuente.\n");
+        }
+        else if(lista->mazoI.calidadC==3)
+        {
+            printf("Calidad: Rara.\n");
+        }
+        else if(lista->mazoI.calidadC==4)
+        {
+            printf("Calidad: Holografica.\n");
+        }
+        else if(lista->mazoI.calidadC==5)
+        {
+            printf("Calidad: Luminosa.\n");
+        }
+        else if(lista->mazoI.calidadC==6)
+        {
+            printf("Calidad: Secreta.\n");
+        }
+        mostrarListaD(lista->siguiente);
+    }
+}
 ///________intercambiojugadosres____________-////
 nodoA* inicArbol()
 {
@@ -625,11 +1015,11 @@ void elegirCartaInter(nodoA**arbolA, nodoTipo** listaO)
             printf("Cual quiere ingresar el en mazo de intercambion:\n");
             fflush(stdin);
             gets(nombreB);
-            if(buscarCartaNombreO(*listaO,nombreB)!=NULL)
+            if(buscarCartaNombreYTipo(*listaO,nombreB)!=NULL)
             {
-                nodoL=buscarCartaNombreO(*listaO, nombreB);
+                nodoL=buscarCartaNombreYTipo(*listaO, nombreB);
                 cartita=nodoL->dato;
-                (*listaO)=eliminarCarta(*listaO, nombreB);
+                (*listaO)=eliminarCartaTipo(*listaO, nombreB);
                 nodoArbol=crearNodoA(cartita);
                 (*arbolA)=agregarArbol(*arbolA,nodoArbol);
                 printf("Desea cargar otra carta en el mazo de intercambio ingrese 's':");
@@ -642,7 +1032,8 @@ void elegirCartaInter(nodoA**arbolA, nodoTipo** listaO)
                 scanf("%c",&continuar);
             }
         }
-        while(continuar=='s'|| continuar=='S');
+        while(continuar=='s'||continuar=='S');
+
     }
 }
 void mostrarArbol(nodoA* arbol)
@@ -1160,6 +1551,7 @@ void menu(nodoTipo* lista,nodoPila*pila)
         case 0:
             system("cls");
             menu1(lista,pila);
+
             break;
         case 1:
             system("cls");
