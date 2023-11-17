@@ -577,7 +577,262 @@ void filtrarCartasPTipo(nodoTipo* listaO)
 }
 ///-----------punto7-estadisticadeMazo-----------///
 
+///________intercambiojugadosres____________-////
+nodoA* inicArbol()
+{
+    return NULL;
+}
+nodoA* crearNodoA(stCarta cartita)
+{
+    nodoA* auxA=(nodoA*)malloc(sizeof(nodoA));
+    auxA->mazoI=cartita;
+    auxA->dere=inicArbol();
+    auxA->izq=inicArbol();
+    return auxA;
+}
+nodoA* agregarArbol(nodoA* arbol, nodoA* nuevoN)
+{
+    if(arbol==NULL)
+    {
+        arbol=nuevoN;
+    }
+    else
+    {
+        if(strcmp(arbol->mazoI.nombre,nuevoN->mazoI.nombre)<0)
+        {
+            arbol->izq=agregarArbol(arbol->izq,nuevoN);
+        }
+        else
+        {
+            arbol->dere=agregarArbol(arbol->dere,nuevoN);
+        }
+    }
+    return arbol;
+}
+void elegirCartaInter(nodoA**arbolA, nodoTipo** listaO)
+{
+    char continuar='s';
+    char nombreB[20];
+    nodoPoke* nodoL;
+    stCarta cartita;
+    nodoA* nodoArbol;
+    if(*listaO!=NULL)
+    {
+        do
+        {
+            printf("Usted tiene estas cartas:\n");
+            mostrarCatasMazo(*listaO);
+            printf("Cual quiere ingresar el en mazo de intercambion:\n");
+            fflush(stdin);
+            gets(nombreB);
+            if(buscarCartaNombreO(*listaO,nombreB)!=NULL)
+            {
+                nodoL=buscarCartaNombreO(*listaO, nombreB);
+                cartita=nodoL->dato;
+                (*listaO)=eliminarCarta(*listaO, nombreB);
+                nodoArbol=crearNodoA(cartita);
+                (*arbolA)=agregarArbol(*arbolA,nodoArbol);
+                printf("Desea cargar otra carta en el mazo de intercambio ingrese 's':");
+                fflush(stdin);
+                scanf("%c",&continuar);
+            }else
+            {
+                printf("La carta no se encontro desea buscar otra? ingrese 's':");
+                fflush(stdin);
+                scanf("%c",&continuar);
+            }
+        }
+        while(continuar=='s'||continuar=='S');
 
+    }
+}
+void mostrarArbol(nodoA* arbol)
+{
+    if(arbol!=NULL)
+    {
+        mostrarStcarta(arbol->mazoI);
+        mostrarArbol(arbol->dere);
+        mostrarArbol(arbol->izq);
+    }
+}
+int existeNodoA(nodoA* arbol,char nombreB[20])
+{
+    int hay=0;
+    if(arbol!=NULL)
+    {
+        if(strcmp(arbol->mazoI.nombre,nombreB)==0)
+        {
+            hay=1;
+        }else
+        {
+            hay=existeNodoA(arbol->dere,nombreB);
+            if(hay==0)
+            {
+                hay=existeNodoA(arbol->izq,nombreB);
+            }
+        }
+    }
+    return hay;
+}
+void intercanbiarJ1yJ2(nodoA** jugadorA,nodoA** jugadorC)
+{
+    char nombreC1[20];
+    char nombreC2[20];
+    char continuar='s';
+    stCarta auxJugador1;
+    stCarta auxJugador2;
+    if(*jugadorA==NULL)
+    {
+        printf("Usted no cargo su mazo de intercambio porfavor vulva y cargue el mazo:\n");
+    }
+    else if(*jugadorC==NULL)
+    {
+        printf("El otro jugador no cargo su mazo de intercambio porfavor vulva y cargue el mazo:\n");
+    }
+    else
+    {
+        do
+        {
+            printf("Su mazo para intercambiar es:\n ");
+            mostrarArbol(*jugadorA);
+            printf("El mazo del ortro juegador es :\n");
+            mostrarArbol(*jugadorC);
+            printf("Ingrese la carta de su mazo que quiere cambiar:\n");
+            fflush(stdin);
+            gets(nombreC1);
+            if(existeNodoA(*jugadorA,nombreC1)==1)
+            {
+                printf("Ingrese el Nombre de la carta que desea eligir del mazo del otro jugador:");
+                fflush(stdin);
+                gets(nombreC2);
+                if(existeNodoA(*jugadorC,nombreC2)==1)
+                {
+                    (*jugadorA)=buscarNodoYExtraer((*jugadorA),&auxJugador1,nombreC1);
+                    (*jugadorC)=agregarArbol((*jugadorC),crearNodoA(auxJugador1));
+                    (*jugadorC)=buscarNodoYExtraer((*jugadorC),&auxJugador2,nombreC2);
+                    (*jugadorA)=agregarArbol((*jugadorA),crearNodoA(auxJugador2));
+                    printf("Las cartas se intercambiaron si quiere intercambiar otras cartas ingrese 's':");
+                    scanf("%c",&continuar);
+                }else
+                {
+                    printf("La carta buscada del otro jugador no existe si desea intercambiar\n");
+                    printf("orta carta ingrese 's':");
+                    fflush(stdin);
+                    scanf("%c",&continuar);
+                }
+            }else
+            {
+                printf("La carta buscada de tu mazo intercambiable no existe:\n");
+                printf("Deseabuscar otras cartas ingrese 's':");
+                fflush(stdin);
+                scanf("%c",&continuar);
+            }
+        }while(continuar=='s'||continuar=='S');
+    }
+}
+nodoA* buscarNodoYExtraer(nodoA* arbol,stCarta* cartabuscada,char nombreB[20])
+{
+
+    if(arbol!=NULL)
+    {
+        if(strcmp(arbol->mazoI.nombre,nombreB)==0)
+        {
+            if((arbol->dere!=NULL)&&(arbol->izq!=NULL))
+            {
+                nodoA* arbolAux=masIzquierda(arbol->dere);
+                arbol->mazoI=arbolAux->mazoI;
+                arbol->dere=buscarNodoYExtraer(arbol->dere,cartabuscada,nombreB);
+            }else
+            {
+                nodoA* aux=arbol;
+                *cartabuscada=aux->mazoI;
+                if(arbol->dere!=NULL && arbol->izq==NULL)
+                {
+                    arbol=arbol->dere;
+                }else if(arbol->izq!=NULL && arbol->dere==NULL)
+                {
+                    arbol=arbol->izq;
+                }else if(arbol->dere==NULL && arbol->izq==NULL)
+                {
+                    arbol=NULL;
+                }
+                free(aux);
+            }
+        }else
+        {
+            if(strcmp(arbol->mazoI.nombre,nombreB)>0)
+            {
+
+                arbol->dere=buscarNodoYExtraer(arbol->dere,cartabuscada,nombreB);
+            }else
+            {
+                arbol->izq=buscarNodoYExtraer(arbol->izq,cartabuscada,nombreB);
+            }
+        }
+    }
+    return arbol;
+}
+nodoA* masDerecha(nodoA* arbol)
+{
+    if(arbol!=NULL && arbol->dere!=NULL)
+    {
+        arbol=masDerecha(arbol->dere);
+    }
+    return arbol;
+}
+nodoA* masIzquierda(nodoA* arbol)
+{
+    if(arbol!=NULL && arbol->izq!=NULL)
+    {
+        arbol=masIzquierda(arbol->izq);
+    }
+    return arbol;
+}
+nodoTipo* mazoIaMazoO(nodoTipo* listaO,nodoA** arbolI)
+{
+    char continuar='s';
+    char nombreB[20];
+    if(arbolI!=NULL)
+    {
+        do
+        {
+            printf("Su mazo de intercambio es :\n");
+            mostrarArbol(*arbolI);
+            printf("Ingrese el nombre de la carta que quiere extraer ");
+            printf("del mazo intercambiable al mazo general:");
+            fflush(stdin);
+            gets(nombreB);
+            if(existeNodoA(*arbolI,nombreB)==1)
+            {
+                stCarta cartita;
+                *arbolI=buscarNodoYExtraer(*arbolI,&cartita,nombreB);
+                if(existeNodoTipo(listaO,cartita.nombre)==1)
+                {
+                    nodoTipo* auxTipo=buscarTipoLugar(listaO,nombreB);
+                    nodoPoke* nuevoN=crearNodoPoke(cartita);
+                    auxTipo->lista=agregarAlFinalPoke(auxTipo->lista,nuevoN);
+                }else
+                {
+                    nodoTipo* nuevoT=crearNodoTipo(cartita.tipo);
+                    nodoPoke* nuevoP=crearNodoPoke(cartita);
+                    listaO=agregarAlFinalTipo(listaO,nuevoT);
+                    nodoTipo* auxT=buscarTipoLugar(listaO,cartita.tipo);
+                    auxT->lista=agregarAlFinalPoke(auxT->lista,nuevoP);
+                }
+            }else
+            {
+                printf("La carta buscada no se a encontrado quiere extraer otro ingrese 's':");
+                fflush(stdin);
+                scanf("%c",&continuar);
+            }
+            printf("Quiere extraer otra carta al mazo general ingrese 's':");
+            fflush(stdin);
+            scanf("%c",&continuar);
+            }while(continuar=='s'||continuar=='S');
+
+        }
+    return listaO;
+}
 
 ///--------------------------------------punto 9 genera estadisticas---------------------------------///
 
