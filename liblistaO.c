@@ -1610,11 +1610,11 @@ void menu1(nodoTipo* lista,nodoPila* pila)
             gotoxy(30, 8);
             printf("2. Mostrar Mazos");
             gotoxy(30, 9);
-            printf("3. Intercambiar cartas");
+            printf("3. Guardar Mazo");
             gotoxy(30,10);
             printf("4. Eliminar carta");
             gotoxy(30,11);
-            printf("5. Guardar Mazo");
+            printf("5. Intercambiar cartas");
             gotoxy(30,12);
             printf("6. Cargar Mazo Intercambio");
             gotoxy(30,13);
@@ -1649,7 +1649,9 @@ void menu1(nodoTipo* lista,nodoPila* pila)
             break;
         case 2:
             system("cls");
-
+            guardarMazo(lista);
+            printf("\n\nEl mazo se a guardado existosamente\n\n\n");
+            system("pause");
             break;
         case 3:
             system("cls");
@@ -1660,9 +1662,6 @@ void menu1(nodoTipo* lista,nodoPila* pila)
             break;
         case 4:
             system("cls");
-            guardarMazo(lista);
-            printf("\n\nEl mazo se a guardado existosamente\n\n\n");
-            system("pause");
             break;
         case 5:
             system("cls");
@@ -1731,11 +1730,11 @@ void menu2(nodoTipo* lista,nodoPila* pila)
             gotoxy(30, 8);
             printf("2. Mostrar Mazos");
             gotoxy(30, 9);
-            printf("3. Intercambiar cartas");
+            printf("3. Guardar Mazo");
             gotoxy(30,10);
             printf("4. Eliminar carta");
             gotoxy(30,11);
-            printf("5. Guardar Mazo");
+            printf("5. Intercambiar cartas");
             gotoxy(30,12);
             printf("6. Cargar Mazo Intercambio");
             gotoxy(30,13);
@@ -1770,7 +1769,9 @@ void menu2(nodoTipo* lista,nodoPila* pila)
             break;
         case 2:
             system("cls");
-
+            guardarMazo(lista);
+            printf("\n\nEl mazo se a guardado existosamente\n\n\n");
+            system("pause");
             break;
         case 3:
             system("cls");
@@ -1781,12 +1782,10 @@ void menu2(nodoTipo* lista,nodoPila* pila)
             break;
         case 4:
             system("cls");
-            guardarMazo(lista);
-            printf("\n\nEl mazo se a guardado existosamente\n\n\n");
-            system("pause");
             break;
         case 5:
             system("cls");
+
             break;
         case 6:
             system("cls");
