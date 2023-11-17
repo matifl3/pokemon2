@@ -1,4 +1,4 @@
-/#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "string.h"
 #include "gotoxy.h"
@@ -296,7 +296,7 @@ nodoPoke* agregarAlFinalPoke (nodoPoke* lista,nodoPoke* nuevo)
     }
     return lista;
 }
-nodoTipo* buscarTipoLugar(nodoTipo * lista,char tipo[20])   
+nodoTipo* buscarTipoLugar(nodoTipo * lista,char tipo[20])
 {
     nodoTipo * aux=lista;
 
@@ -642,8 +642,7 @@ void elegirCartaInter(nodoA**arbolA, nodoTipo** listaO)
                 scanf("%c",&continuar);
             }
         }
-        while(continuar=='s'||continuar=='S');
-
+        while(continuar=='s'|| continuar=='S');
     }
 }
 void mostrarArbol(nodoA* arbol)
@@ -1160,12 +1159,7 @@ void menu(nodoTipo* lista,nodoPila*pila)
         {
         case 0:
             system("cls");
-<<<<<<< HEAD
             menu1(lista,pila);
-=======
-//cargar mazo- guardar datos- leer datos- eliminar carta- intercambio- cargarMazoIntercambio
-//cargarMazoCompetitiVo- cargarMazoMemoria- mostarcarta- estadistica del mazo
->>>>>>> 820421094c8b7b914e3879fa10d72a9d4e2a4989
             break;
         case 1:
             system("cls");

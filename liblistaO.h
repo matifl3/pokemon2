@@ -33,6 +33,24 @@ typedef struct
     struct nodoPila* sig;
 } nodoPila;
 
+typedef struct
+{
+    stCarta mazoI;
+    struct nodoDPoke* siguiente;
+    struct nodoDPoke* anterior;
+}nodoDPoke;
+typedef struct
+{
+    nodoDPoke* inicioF;
+    nodoDPoke* finalF;
+}filaIter;
+
+typedef struct
+{
+    stCarta mazoI;
+    nodoDPoke* dere;
+    nodoDPoke* izq;
+}nodoA;
 
 nodoTipo* inicListaT();
 nodoPoke* inicListaP();
