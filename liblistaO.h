@@ -32,7 +32,12 @@ typedef struct
     int cantidad;
     struct nodoPila* sig;
 } nodoPila;
-
+typedef struct
+{
+    stCarta mazoI;
+    nodoDPoke* dere;
+    nodoDPoke* izq;
+}nodoA;
 
 nodoTipo* inicListaT();
 nodoPoke* inicListaP();
