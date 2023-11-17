@@ -26,6 +26,14 @@ typedef struct
 } nodoTipo;
 
 
+typedef struct
+{
+    stCarta dato;
+    int cantidad;
+    struct nodoPila* sig;
+} nodoPila;
+
+
 nodoTipo* inicListaT();
 nodoPoke* inicListaP();
 nodoPoke* crearNodoPoke(stCarta);
@@ -44,9 +52,6 @@ int verificaHp(int);
 int verificaRareza(int);
 int verificaCalidadC(int);
 int verificaPrecio(int);
-
-
-
 nodoTipo* buscarTipoLugar(nodoTipo*,char[50]);
 nodoTipo* agregarCarta(nodoTipo*,nodoPoke*,char[50]);
 nodoTipo* cargarUnaCarta(nodoTipo*);
@@ -88,14 +93,23 @@ void mostrarStats(nodoTipo* lista);
 ///---------------------------- interfaz---------------------------------------//
 
 void mostradorDeMazos(nodoTipo* lista);
-void menu(nodoTipo* lista);
+void menu(nodoTipo* lista,nodoPila*pila);
+void menu1(nodoTipo* lista,nodoPila* pila);
 int movertecla(int tecla,int opcionSeleccionada,int opcionSalida);
 
 
-
-
-
-
+///-----------------------------competitivo--------------------------////
+stCarta cargarCarta();
+nodoPila* inicPila();
+nodoPila* crearNodoPila(stCarta dato);
+nodoPila* buscaUltimo(nodoPila*lista);
+nodoPila* agregarAlfinal(nodoPila*pila,nodoPila*nuevo);
+nodoPila* apilar(nodoPila* pila,stCarta a);
+nodoPila* apilar(nodoPila* pila,stCarta a);
+int incrementaCantidad(nodoPila* pila);
+nodoPila* desapilar(nodoPila** pila);
+nodoPila* muchosApila(nodoPila*pila,nodoPoke*lista);
+nodoPila*mostrarPila(nodoPila* pila);
 
 
 

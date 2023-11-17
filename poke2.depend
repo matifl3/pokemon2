@@ -48,12 +48,12 @@
 	<stdlib.h>
 	<windows.h>
 
-1699646092 source:c:\users\matif\onedrive\escritorio\facultad mati\programacion y laboratorio 2\poke2\main.c
+1700243705 source:c:\users\matif\onedrive\escritorio\facultad mati\programacion y laboratorio 2\poke2\main.c
 	"liblistaO.h"
 
-1699645391 c:\users\matif\onedrive\escritorio\facultad mati\programacion y laboratorio 2\poke2\liblistao.h
+1700243705 c:\users\matif\onedrive\escritorio\facultad mati\programacion y laboratorio 2\poke2\liblistao.h
 
-1699646180 source:c:\users\matif\onedrive\escritorio\facultad mati\programacion y laboratorio 2\poke2\liblistao.c
+1700224144 source:c:\users\matif\onedrive\escritorio\facultad mati\programacion y laboratorio 2\poke2\liblistao.c
 	<stdio.h>
 	<stdlib.h>
 	"string.h"
