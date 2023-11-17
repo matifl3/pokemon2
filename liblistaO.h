@@ -1,5 +1,6 @@
 #ifndef LIBLISTAO_H_INCLUDED
 #define LIBLISTAO_H_INCLUDED
+#include <stdio.h>
 
 typedef struct
 {
@@ -107,6 +108,7 @@ nodoA* inicArbol();
 nodoA* crearNodoA(stCarta);
 nodoA* agregarArbol(nodoA*,nodoA*);
 void elegirCartaInter(nodoA**, nodoTipo**);
+void mostrarStcarta(stCarta);
 void mostrarArbol(nodoA*);
 ///--///
 void intercanbiarJ1yJ2(nodoA**, nodoA**);
@@ -132,8 +134,9 @@ void mostrarStats(nodoTipo* lista);
 ///---------------------------- interfaz---------------------------------------//
 
 void mostradorDeMazos(nodoTipo* lista);
-void menu(nodoTipo* lista,nodoPila*pila);
-void menu1(nodoTipo* lista,nodoPila* pila);
+void menu(nodoTipo* lista,nodoPila*pila,nodoA**jugadorA,nodoA**juegdorC);
+void menu1(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC);
+void menu2(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC);
 int movertecla(int tecla,int opcionSeleccionada,int opcionSalida);
 
 

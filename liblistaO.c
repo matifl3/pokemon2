@@ -1036,6 +1036,55 @@ void elegirCartaInter(nodoA**arbolA, nodoTipo** listaO)
 
     }
 }
+void mostrarStcarta(stCarta cartita)
+{
+    printf("Nombre: %s\n",cartita.nombre);
+    printf("Tipo: %s\n",cartita.tipo);
+    if(cartita.rareza==1)
+    {
+        printf("Rareza: Comun.\n");
+    }
+    else if(cartita.rareza==2)
+    {
+        printf("Rareza: Poco Comun.\n");
+    }
+    else if(cartita.rareza==3)
+    {
+        printf("Rareza: Raro.\n");
+    }
+    else if(cartita.rareza==4)
+    {
+        printf("Rareza: Legendario.\n");
+    }
+    printf("hp: %d\n",cartita.hp);
+    printf("lvl: %d\n",cartita.lvl);
+    printf("Precio: %d\n",cartita.precio);
+
+    if(cartita.calidadC==1)
+    {
+        printf("Calidad: Comun.\n");
+    }
+    else if(cartita.calidadC==2)
+    {
+        printf("Calidad: Infrecuente.\n");
+    }
+    else if(cartita.calidadC==3)
+    {
+        printf("Calidad: Rara.\n");
+    }
+    else if(cartita.calidadC==4)
+    {
+        printf("Calidad: Holografica.\n");
+    }
+    else if(cartita.calidadC==5)
+    {
+        printf("Calidad: Luminosa.\n");
+    }
+    else if(cartita.calidadC==6)
+    {
+        printf("Calidad: Secreta.\n");
+    }
+}
 void mostrarArbol(nodoA* arbol)
 {
     if(arbol!=NULL)
@@ -1507,7 +1556,7 @@ int movertecla(int tecla,int opcionSeleccionada,int opcionSalida)
     return opcionSeleccionada;
 }
 
-void menu(nodoTipo* lista,nodoPila*pila)
+void menu(nodoTipo* lista,nodoPila*pila,nodoA**jugadorA,nodoA**juegdorC)
 {
     int opcionSeleccionada = 0;
     int tecla;
@@ -1550,12 +1599,12 @@ void menu(nodoTipo* lista,nodoPila*pila)
         {
         case 0:
             system("cls");
-            menu1(lista,pila);
+            menu1(lista,pila,jugadorA,juegdorC);
 
             break;
         case 1:
             system("cls");
-            menu2(lista);
+            menu2(lista,pila,jugadorA,juegdorC);
             break;
         }
 int max=2;
