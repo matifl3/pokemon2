@@ -1588,7 +1588,7 @@ int selec=0;
 }
 
 
-void menu1(nodoTipo* lista,nodoPila* pila)
+void menu1(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC)
 {
     int opcionSeleccionada = 0;
     int tecla;
@@ -1662,9 +1662,11 @@ void menu1(nodoTipo* lista,nodoPila* pila)
             break;
         case 4:
             system("cls");
+            intercanbiarJ1yJ2(jugadorA,juegdorC);
             break;
         case 5:
             system("cls");
+            elegirCartaInter(jugadorA,lista);
             break;
         case 6:
             system("cls");
@@ -1708,7 +1710,7 @@ void menu1(nodoTipo* lista,nodoPila* pila)
 
 }
 
-void menu2(nodoTipo* lista,nodoPila* pila)
+void menu2(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC)
 {
     int opcionSeleccionada = 0;
     int tecla;
@@ -1723,7 +1725,7 @@ void menu2(nodoTipo* lista,nodoPila* pila)
             system("cls");
             color(14); // Color amarillo
             gotoxy(35, 5);
-            printf("BIENVENIDO JUGADOR 1");
+            printf("BIENVENIDO JUGADOR 2");
             color(15); // Color blanco
             gotoxy(30, 7);
             printf("1. Cargar el Mazo");
@@ -1782,10 +1784,11 @@ void menu2(nodoTipo* lista,nodoPila* pila)
             break;
         case 4:
             system("cls");
+            intercanbiarJ1yJ2(jugadorA,juegdorC);
             break;
         case 5:
             system("cls");
-
+            elegirCartaInter(jugadorA,lista);
             break;
         case 6:
             system("cls");
@@ -1807,7 +1810,7 @@ void menu2(nodoTipo* lista,nodoPila* pila)
             system("cls");
             color(14);
             gotoxy(35,5);
-            printf("QUIERE SALIR DEl MENU JUAGADOR 1? ");
+            printf("QUIERE SALIR DEl MENU JUAGADOR 2? ");
             color(15);
             gotoxy(30,7);
             printf("Si");
