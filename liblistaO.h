@@ -76,7 +76,19 @@ void filtrarCartasPTipo(nodoTipo*);
 ///----------------------------punto 7-darEstadistica del Mazo----------------------///
 void estadisticasMazo(nodoTipo*);
 ///--------------------------------punto 8---intercambio de cartas entre jugadores------///
-
+nodoA* inicArbol();
+nodoA* crearNodoA(stCarta);
+nodoA* agregarArbol(nodoA*,nodoA*);
+void elegirCartaInter(nodoA**, nodoTipo**);
+void mostrarArbol(nodoA*);
+///--///
+void intercanbiarJ1yJ2(nodoA**, nodoA**);
+nodoA* buscarNodoYExtraer(nodoA*,stCarta*,char[20]);
+int existeNodoA(nodoA*,char[20]);
+nodoA* masDerecha(nodoA*);
+nodoA* masIzquierda(nodoA*);
+///--pasar de intercambio a lista--///
+nodoTipo* mazoIaMazoO(nodoTipo*,nodoA**);
 ///--------------------------------------punto 9 genera estadisticas---------------------------------///
 int statsRarezaComun(nodoTipo* lista);
 int statsRarezaPocoComun(nodoTipo* lista);
