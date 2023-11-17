@@ -17,7 +17,17 @@ typedef struct
     stCarta dato;
     struct nodoPoke* siguiente;
 } nodoPoke;
-
+typedef struct
+{
+    stCarta mazoI;
+    struct nodoDPoke* siguiente;
+    struct nodoDPoke* anterior;
+}nodoDPoke;
+typedef struct
+{
+    nodoDPoke* inicioF;
+    nodoDPoke* finalF;
+}filaIter;
 typedef struct
 {
     char tipo[20];// agua - fuego - planta - tierra - roca
