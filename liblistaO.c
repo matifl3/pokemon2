@@ -533,7 +533,7 @@ int contarCantidadCartasT(nodoPoke* lista)
 }
 void guardarMazo(nodoTipo* listaO)
 {
-    FILE* fp= fopen("DatosJugador1.bin","wb");
+    FILE* fp= fopen("DatosJugador1.bin","ab");
     if(fp!=NULL)
     {
         while(listaO!=NULL)
@@ -704,7 +704,7 @@ void leerMazoMemo2(filaIter* filita)
 ///--------------------------------------------------------////
 void guardarMazo2(nodoTipo* listaO)
 {
-    FILE* fp= fopen("DatosJugador2.bin","wb");
+    FILE* fp= fopen("DatosJugador2.bin","ab");
     if(fp!=NULL)
     {
         while(listaO!=NULL)
@@ -1636,7 +1636,7 @@ void menu1(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC,filaIt
 {
     int opcionSeleccionada = 0;
     int tecla;
-    int opcionSalida=12;
+    int opcionSalida=13;
     hidecursor(0);
     int flag=0;
 
@@ -1670,9 +1670,11 @@ void menu1(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC,filaIt
             gotoxy(30,16);
             printf("10. Carga mazo memoria");
             gotoxy(30,17);
-            printf("11. De mazo Fila a mazoO");
+            printf("11. De mazo intercambio a mazo o");
             gotoxy(30,18);
-            printf("12. Salir");
+            printf("12. Leer");
+            gotoxy(30,19);
+            printf("13. Salir");
 
             gotoxy(28, 7 + opcionSeleccionada);
             printf("->");
@@ -1728,19 +1730,22 @@ void menu1(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC,filaIt
             break;
         case 8:
             system("cls");
-
             break;
         case 9:
             system("cls");
             cargarMazoMemoria(fila,lista);
             break;
+        case 10 :
 
+            break;
+        case 11:
+            break;
         }
 
 
 
 
-        if(opcionSeleccionada==11)
+        if(opcionSeleccionada==13)
             flag=-1;
     }
     while (flag!=-1);
@@ -1749,9 +1754,8 @@ void menu1(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC,filaIt
 
 void menu2(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC,filaIter* fila)
 {
-    int opcionSeleccionada = 0;
     int tecla;
-    int opcionSalida=12;
+    int opcionSalida=13;
     hidecursor(0);
     int flag=0;
 
@@ -1785,9 +1789,11 @@ void menu2(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC,filaIt
             gotoxy(30,16);
             printf("10. Carga mazo memoria");
             gotoxy(30,17);
-            printf("11. De mazo Fila a mazoO");
+            printf("11. De mazo intercambio a mazo o");
             gotoxy(30,18);
-            printf("12. Salir");
+            printf("12. Leer");
+            gotoxy(30,19);
+            printf("13. Salir");
 
             gotoxy(28, 7 + opcionSeleccionada);
             printf("->");
@@ -1814,14 +1820,14 @@ void menu2(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC,filaIt
             break;
         case 2:
             system("cls");
-            guardarMazo2(lista);
+            guardarMazo(lista);
             printf("\n\nEl mazo se a guardado existosamente\n\n\n");
             system("pause");
             break;
         case 3:
             system("cls");
             lista=eliminarCarta(lista);
-            mostrarListaTipo(lista);
+            mostradorDeMazos(lista,pila,fila);
             printf("\n\n\n");
             system("pause");
             break;
@@ -1843,16 +1849,22 @@ void menu2(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC,filaIt
             break;
         case 8:
             system("cls");
-
             break;
         case 9:
             system("cls");
             cargarMazoMemoria(fila,lista);
             break;
+        case 10 :
 
+            break;
+        case 11:
+            break;
         }
 
-        if(opcionSeleccionada==11)
+
+
+
+        if(opcionSeleccionada==13)
             flag=-1;
     }
     while (flag!=-1);
@@ -1863,7 +1875,7 @@ void mostradorDeMazos(nodoTipo* lista,nodoPila*pila,filaIter*fila)
 {
     int opcionSeleccionada = 0;
     int tecla;
-    int opcionSalida=5;
+    int opcionSalida=6;
     hidecursor(0);
     int flag=0;
     do
@@ -1884,7 +1896,9 @@ void mostradorDeMazos(nodoTipo* lista,nodoPila*pila,filaIter*fila)
             gotoxy(30, 10);
             printf("4. Mostrar Mazo memoria");
             gotoxy(30, 11);
-            printf("5. Salir");
+            printf("5. Mostrar Mazo intercambio");
+            gotoxy(30, 12);
+            printf("6. Salir");
 
 
 
@@ -1926,7 +1940,10 @@ void mostradorDeMazos(nodoTipo* lista,nodoPila*pila,filaIter*fila)
             printf("\n\n\n");
             system("pause");
             break;
-        case 4:
+        case 5:
+
+            break;
+        case 6:
             flag=-1;
         }
     }
