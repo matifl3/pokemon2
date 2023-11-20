@@ -858,7 +858,7 @@ void cargarMazoMemoria(filaIter* filita, nodoTipo* listaO)
     {
         do
         {
-            printf("Usted tien estas cartas:\n");
+            printf("Usted tiene estas cartas:\n");
             mostrarCatasMazo(listaO);
             printf("ingrese el nombre de la carta a buscar: ");
             fflush(stdin);
@@ -875,14 +875,16 @@ void cargarMazoMemoria(filaIter* filita, nodoTipo* listaO)
                     printf("Desea ingresar otra carta al mazo de Memoria:?\n");
                     printf("Ingrese 's'");
                     scanf("%c",&continuar);
-                }else
+                }
+                else
                 {
                     printf("La carta que se desea ingresar ya exsiste en el mazo:\n");
                     printf("Desea ingresar otra carta al mazo de Memoria:?\n");
                     printf("Ingrese 's'");
                     scanf("%c",&continuar);
                 }
-            }else
+            }
+            else
             {
                 printf("El nombre de la carta buscada no existe:\n");
                 printf("Desea ingresar otra carta al mazo de Memoria:?\n");
@@ -1025,7 +1027,8 @@ void elegirCartaInter(nodoA**arbolA, nodoTipo** listaO)
                 printf("Desea cargar otra carta en el mazo de intercambio ingrese 's':");
                 fflush(stdin);
                 scanf("%c",&continuar);
-            }else
+            }
+            else
             {
                 printf("La carta no se encontro desea buscar otra? ingrese 's':");
                 fflush(stdin);
@@ -1102,7 +1105,8 @@ int existeNodoA(nodoA* arbol,char nombreB[20])
         if(strcmp(arbol->mazoI.nombre,nombreB)==0)
         {
             hay=1;
-        }else
+        }
+        else
         {
             hay=existeNodoA(arbol->dere,nombreB);
             if(hay==0)
@@ -1152,21 +1156,24 @@ void intercanbiarJ1yJ2(nodoA** jugadorA,nodoA** jugadorC)
                     (*jugadorA)=agregarArbol((*jugadorA),crearNodoA(auxJugador2));
                     printf("Las cartas se intercambiaron si quiere intercambiar otras cartas ingrese 's':");
                     scanf("%c",&continuar);
-                }else
+                }
+                else
                 {
                     printf("La carta buscada del otro jugador no existe si desea intercambiar\n");
                     printf("orta carta ingrese 's':");
                     fflush(stdin);
                     scanf("%c",&continuar);
                 }
-            }else
+            }
+            else
             {
                 printf("La carta buscada de tu mazo intercambiable no existe:\n");
                 printf("Deseabuscar otras cartas ingrese 's':");
                 fflush(stdin);
                 scanf("%c",&continuar);
             }
-        }while(continuar=='s'||continuar=='S');
+        }
+        while(continuar=='s'||continuar=='S');
     }
 }
 nodoA* buscarNodoYExtraer(nodoA* arbol,stCarta* cartabuscada,char nombreB[20])
@@ -1181,29 +1188,34 @@ nodoA* buscarNodoYExtraer(nodoA* arbol,stCarta* cartabuscada,char nombreB[20])
                 nodoA* arbolAux=masIzquierda(arbol->dere);
                 arbol->mazoI=arbolAux->mazoI;
                 arbol->dere=buscarNodoYExtraer(arbol->dere,cartabuscada,nombreB);
-            }else
+            }
+            else
             {
                 nodoA* aux=arbol;
                 *cartabuscada=aux->mazoI;
                 if(arbol->dere!=NULL && arbol->izq==NULL)
                 {
                     arbol=arbol->dere;
-                }else if(arbol->izq!=NULL && arbol->dere==NULL)
+                }
+                else if(arbol->izq!=NULL && arbol->dere==NULL)
                 {
                     arbol=arbol->izq;
-                }else if(arbol->dere==NULL && arbol->izq==NULL)
+                }
+                else if(arbol->dere==NULL && arbol->izq==NULL)
                 {
                     arbol=NULL;
                 }
                 free(aux);
             }
-        }else
+        }
+        else
         {
             if(strcmp(arbol->mazoI.nombre,nombreB)>0)
             {
 
                 arbol->dere=buscarNodoYExtraer(arbol->dere,cartabuscada,nombreB);
-            }else
+            }
+            else
             {
                 arbol->izq=buscarNodoYExtraer(arbol->izq,cartabuscada,nombreB);
             }
@@ -1250,7 +1262,8 @@ nodoTipo* mazoIaMazoO(nodoTipo* listaO,nodoA** arbolI)
                     nodoTipo* auxTipo=buscarTipoLugar(listaO,nombreB);
                     nodoPoke* nuevoN=crearNodoPoke(cartita);
                     auxTipo->lista=agregarAlFinalPoke(auxTipo->lista,nuevoN);
-                }else
+                }
+                else
                 {
                     nodoTipo* nuevoT=crearNodoTipo(cartita.tipo);
                     nodoPoke* nuevoP=crearNodoPoke(cartita);
@@ -1258,7 +1271,8 @@ nodoTipo* mazoIaMazoO(nodoTipo* listaO,nodoA** arbolI)
                     nodoTipo* auxT=buscarTipoLugar(listaO,cartita.tipo);
                     auxT->lista=agregarAlFinalPoke(auxT->lista,nuevoP);
                 }
-            }else
+            }
+            else
             {
                 printf("La carta buscada no se a encontrado quiere extraer otro ingrese 's':");
                 fflush(stdin);
@@ -1267,9 +1281,10 @@ nodoTipo* mazoIaMazoO(nodoTipo* listaO,nodoA** arbolI)
             printf("Quiere extraer otra carta al mazo general ingrese 's':");
             fflush(stdin);
             scanf("%c",&continuar);
-            }while(continuar=='s'||continuar=='S');
-
         }
+        while(continuar=='s'||continuar=='S');
+
+    }
     return listaO;
 }
 
@@ -1556,7 +1571,7 @@ int movertecla(int tecla,int opcionSeleccionada,int opcionSalida)
     return opcionSeleccionada;
 }
 
-void menu(nodoTipo* lista,nodoPila*pila,nodoA**jugadorA,nodoA**juegdorC)
+void menu(nodoTipo* lista,nodoPila*pila,nodoA**jugadorA,nodoA**juegdorC,filaIter* fila)
 {
     int opcionSeleccionada = 0;
     int tecla;
@@ -1599,37 +1614,17 @@ void menu(nodoTipo* lista,nodoPila*pila,nodoA**jugadorA,nodoA**juegdorC)
         {
         case 0:
             system("cls");
-            menu1(lista,pila,jugadorA,juegdorC);
+            menu1(lista,pila,jugadorA,juegdorC,fila);
 
             break;
         case 1:
             system("cls");
-            menu2(lista,pila,jugadorA,juegdorC);
+            menu2(lista,pila,jugadorA,juegdorC,fila);
             break;
         }
-int max=2;
-int selec=0;
-        do
-        {
-            system("cls");
-            color(14);
-            gotoxy(35,5);
-            printf("QUIERE SALIR DE LA RED? ");
-            color(15);
-            gotoxy(30,7);
-            printf("Si");
-            gotoxy(30,8);
-            printf("No");
 
-            gotoxy(28, 7 + selec);
-            printf("->");
-            tecla = getch();
 
-            selec=movertecla(tecla,selec,max);
-        }
-        while (tecla != 13);
-
-        if(selec==0)
+        if(opcionSeleccionada==2)
             flag=-1;
     }
     while (flag!=-1);
@@ -1637,11 +1632,11 @@ int selec=0;
 }
 
 
-void menu1(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC)
+void menu1(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC,filaIter* fila)
 {
     int opcionSeleccionada = 0;
     int tecla;
-    int opcionSalida=9;
+    int opcionSalida=12;
     hidecursor(0);
     int flag=0;
 
@@ -1669,9 +1664,15 @@ void menu1(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC)
             gotoxy(30,13);
             printf("7. Cargar Mazo Competitivo");
             gotoxy(30,14);
-            printf("8. Mostra Mazo Competitivo");
+            printf("8. Cargar Tipo de carta");
             gotoxy(30,15);
-            printf("9. Salir");
+            printf("9. Elegir mazo intercambio");
+            gotoxy(30,16);
+            printf("10. Carga mazo memoria");
+            gotoxy(30,17);
+            printf("11. De mazo Fila a mazoO");
+            gotoxy(30,18);
+            printf("12. Salir");
 
             gotoxy(28, 7 + opcionSeleccionada);
             printf("->");
@@ -1694,7 +1695,7 @@ void menu1(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC)
             break;
         case 1:
             system("cls");
-            mostradorDeMazos(lista);
+            mostradorDeMazos(lista,pila,fila);
             break;
         case 2:
             system("cls");
@@ -1705,7 +1706,7 @@ void menu1(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC)
         case 3:
             system("cls");
             lista=eliminarCarta(lista);
-            mostrarListaTipo(lista);
+            mostradorDeMazos(lista,pila,fila);
             printf("\n\n\n");
             system("pause");
             break;
@@ -1723,47 +1724,34 @@ void menu1(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC)
             break;
         case 7:
             system("cls");
-            mostrarPila(pila);
-            printf("\n\n\n");
-            system("pause");
+            lista=cargarNodoTipo(lista);
             break;
-        }
-        int opcionSelc=0;
-        int opcionMaxima=2;
-        do
-        {
-
-
+        case 8:
             system("cls");
-            color(14);
-            gotoxy(35,5);
-            printf("QUIERE SALIR DEl MENU JUAGADOR 1? ");
-            color(15);
-            gotoxy(30,7);
-            printf("Si");
-            gotoxy(30,8);
-            printf("No");
 
-            gotoxy(28, 7 + opcionSelc);
-            printf("->");
-            tecla = getch();
+            break;
+        case 9:
+            system("cls");
+            cargarMazoMemoria(fila,lista);
+            break;
 
-            opcionSelc=movertecla(tecla,opcionSelc,opcionMaxima);
         }
-        while (tecla != 13);
 
-        if(opcionSelc==0)
+
+
+
+        if(opcionSeleccionada==11)
             flag=-1;
     }
     while (flag!=-1);
 
 }
 
-void menu2(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC)
+void menu2(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC,filaIter* fila)
 {
     int opcionSeleccionada = 0;
     int tecla;
-    int opcionSalida=9;
+    int opcionSalida=12;
     hidecursor(0);
     int flag=0;
 
@@ -1774,7 +1762,7 @@ void menu2(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC)
             system("cls");
             color(14); // Color amarillo
             gotoxy(35, 5);
-            printf("BIENVENIDO JUGADOR 2");
+            printf("BIENVENIDO JUGADOR 1");
             color(15); // Color blanco
             gotoxy(30, 7);
             printf("1. Cargar el Mazo");
@@ -1791,9 +1779,15 @@ void menu2(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC)
             gotoxy(30,13);
             printf("7. Cargar Mazo Competitivo");
             gotoxy(30,14);
-            printf("8. Mostra Mazo Competitivo");
+            printf("8. Cargar Tipo de carta");
             gotoxy(30,15);
-            printf("9. Salir");
+            printf("9. Elegir mazo intercambio");
+            gotoxy(30,16);
+            printf("10. Carga mazo memoria");
+            gotoxy(30,17);
+            printf("11. De mazo Fila a mazoO");
+            gotoxy(30,18);
+            printf("12. Salir");
 
             gotoxy(28, 7 + opcionSeleccionada);
             printf("->");
@@ -1816,11 +1810,11 @@ void menu2(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC)
             break;
         case 1:
             system("cls");
-            mostradorDeMazos(lista);
+            mostradorDeMazos(lista,pila,fila);
             break;
         case 2:
             system("cls");
-            guardarMazo(lista);
+            guardarMazo2(lista);
             printf("\n\nEl mazo se a guardado existosamente\n\n\n");
             system("pause");
             break;
@@ -1845,75 +1839,65 @@ void menu2(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC)
             break;
         case 7:
             system("cls");
-            mostrarPila(pila);
-            printf("\n\n\n");
-            system("pause");
+            lista=cargarNodoTipo(lista);
             break;
-        }
-        int opcionSelc=0;
-        int opcionMaxima=2;
-        do
-        {
-
-
+        case 8:
             system("cls");
-            color(14);
-            gotoxy(35,5);
-            printf("QUIERE SALIR DEl MENU JUAGADOR 2? ");
-            color(15);
-            gotoxy(30,7);
-            printf("Si");
-            gotoxy(30,8);
-            printf("No");
 
-            gotoxy(28, 7 + opcionSelc);
-            printf("->");
-            tecla = getch();
+            break;
+        case 9:
+            system("cls");
+            cargarMazoMemoria(fila,lista);
+            break;
 
-            opcionSelc=movertecla(tecla,opcionSelc,opcionMaxima);
         }
-        while (tecla != 13);
 
-        if(opcionSelc==0)
+        if(opcionSeleccionada==11)
             flag=-1;
     }
     while (flag!=-1);
 
 }
 
-void mostradorDeMazos(nodoTipo* lista)
+void mostradorDeMazos(nodoTipo* lista,nodoPila*pila,filaIter*fila)
 {
     int opcionSeleccionada = 0;
     int tecla;
-    int opcionSalida=3;
+    int opcionSalida=5;
     hidecursor(0);
     int flag=0;
-do{
     do
     {
-        system("cls");
-        color(14); // Color amarillo
-        gotoxy(35, 5);
-        printf("MOSTRADOR DE MAZO");
-        color(15); // Color blanco
-        gotoxy(30, 7);
-        printf("1. Mostrar mazo completo");
-        gotoxy(30, 8);
-        printf("2. Mostrar Stats");
-        gotoxy(30, 9);
-        printf("3. Salir");
+        do
+        {
+            system("cls");
+            color(14); // Color amarillo
+            gotoxy(35, 5);
+            printf("MOSTRADOR DE MAZO");
+            color(15); // Color blanco
+            gotoxy(30, 7);
+            printf("1. Mostrar mazo completo");
+            gotoxy(30, 8);
+            printf("2. Mostrar Stats");
+            gotoxy(30, 9);
+            printf("3. Mostrar Mazo competitivo");
+            gotoxy(30, 10);
+            printf("4. Mostrar Mazo memoria");
+            gotoxy(30, 11);
+            printf("5. Salir");
 
 
 
-        gotoxy(28, 7 + opcionSeleccionada);
-        printf("->");
+            gotoxy(28, 7 + opcionSeleccionada);
+            printf("->");
 
 
-        tecla = getch();
+            tecla = getch();
 
-        opcionSeleccionada=movertecla(tecla,opcionSeleccionada,opcionSalida);
+            opcionSeleccionada=movertecla(tecla,opcionSeleccionada,opcionSalida);
 
-    }while (tecla != 13);
+        }
+        while (tecla != 13);
 
 
         switch(opcionSeleccionada)
@@ -1931,12 +1915,24 @@ do{
             system("pause");
             break;
         case 2:
+            system("cls");
+            mostrarPila(pila);
+            printf("\n\n\n");
+            system("pause");
+            break;
+        case 3:
+            system("cls");
+            mostrarfila(fila);
+            printf("\n\n\n");
+            system("pause");
+            break;
+        case 4:
             flag=-1;
         }
     }
     while (flag!=-1);
 
- }
+}
 
 
 ///----------------------------------mazo competitivo---------------------------------------///
@@ -1986,7 +1982,8 @@ nodoPila* apilar(nodoPila* pila,stCarta a)
     if(nuevo->cantidad<=2)
     {
         pila=agregarAlfinal(pila,nuevo);
-    }else
+    }
+    else
     {
         printf("No se puede apilar mas cartas");
     }
@@ -2033,12 +2030,12 @@ nodoPila* muchosApila(nodoPila*pila,nodoPoke*lista)
     scanf("%c",&control);
     while(control=='s')
     {
-    nodoPoke*aux=buscarCartaNombreO(lista);
-    dato=aux->dato;
-    pila=apilar(pila,dato);
-    printf("Quiere seguir apilando? ");
-    fflush(stdin);
-    scanf("%c",&control);
+        nodoPoke*aux=buscarCartaNombreO(lista);
+        dato=aux->dato;
+        pila=apilar(pila,dato);
+        printf("Quiere seguir apilando? ");
+        fflush(stdin);
+        scanf("%c",&control);
     }
     return pila;
 }

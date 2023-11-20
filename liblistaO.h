@@ -133,10 +133,10 @@ void mostrarPrecios(nodoTipo* lista);
 void mostrarStats(nodoTipo* lista);
 ///---------------------------- interfaz---------------------------------------//
 
-void mostradorDeMazos(nodoTipo* lista);
-void menu(nodoTipo* lista,nodoPila*pila,nodoA**jugadorA,nodoA**juegdorC);
-void menu1(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC);
-void menu2(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC);
+void mostradorDeMazos(nodoTipo* lista,nodoPila*pila,filaIter*fila);
+void menu(nodoTipo* lista,nodoPila*pila,nodoA**jugadorA,nodoA**juegdorC,filaIter* fila);
+void menu1(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC,filaIter* fila);
+void menu2(nodoTipo* lista,nodoPila* pila,nodoA**jugadorA,nodoA**juegdorC,filaIter* fila);
 int movertecla(int tecla,int opcionSeleccionada,int opcionSalida);
 
 
